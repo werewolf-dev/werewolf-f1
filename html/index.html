@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>werewolf-f1</title>
+    <style>
+body {      
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.menu {
+    background: linear-gradient(135deg, #004e92, #0066cc);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+    display: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    animation: scaleUp 0.5s ease-in-out, fadeIn 0.5s ease-in-out;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button {
+    background-color: #3aa3ff;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin: 10px 0;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #002347;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.7);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleDown {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0.7);
+    }
+}
+
+</style>
+</head>
+<body>
+    <div class="menu" id="menu">
+        <h2>Araç Çıkar</h2>
+        <button onclick="spawnCar('adder')">Adder</button>
+        <button onclick="spawnCar('t20')">T20</button>
+    </div>
+
+    <script>
+  window.addEventListener("message", function(event) {
+    if (event.data.action === "show") {
+        const menu = document.getElementById("menu");
+        menu.style.display = "block";
+        menu.style.animation = "scaleUp 0.5s ease-in-out, fadeIn 0.5s ease-in-out";
+    } else if (event.data.action === "hide") {
+        const menu = document.getElementById("menu");
+        menu.style.animation = "scaleDown 0.5s ease-in-out, fadeOut 0.5s ease-in-out";
+        setTimeout(() => {
+            menu.style.display = "none";
+        }, 500);
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeMenu();
+    }
+});
+
+function spawnCar(car) {
+    fetch("https://werewolf-f1/spawnCar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ vehicle: car })
+    });
+}
+
+function closeMenu() {
+    fetch("https://werewolf-f1/closeMenu", {
+        method: "POST"
+    });
+    const menu = document.getElementById("menu");
+    menu.style.animation = "scaleDown 0.5s ease-in-out, fadeOut 0.5s ease-in-out";
+    setTimeout(() => {
+        menu.style.display = "none";
+    }, 500);
+}
+    </script>
+</body>
+</html>
