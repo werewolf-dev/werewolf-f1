@@ -11,25 +11,25 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
     margin: 0;
     overflow: hidden;
 }
 
 .menu {
     background: linear-gradient(135deg, #004e92, #0066cc);
-    padding: 20px;
-    border-radius: 15px;
+    padding: 5px;
+    border-radius: 10px;
     text-align: center;
-    width: 250px;
+    width: 75px;
     display: none;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    animation: scaleUp 0.5s ease-in-out, fadeIn 0.5s ease-in-out;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    animation: scaleUp 0.5s ease-in-out, fadeIn 0.5s        ease-in-out;
 }
 
 h2 {
     font-size: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -39,7 +39,7 @@ button {
     background-color: #3aa3ff;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 5px;
     margin: 10px 0;
     cursor: pointer;
     width: 100%;
@@ -97,7 +97,6 @@ button:active {
 </head>
 <body>
     <div class="menu" id="menu">
-        <h2>Araç Çıkar</h2>
         <button onclick="spawnCar('adder')">Adder</button>
         <button onclick="spawnCar('t20')">T20</button>
     </div>
